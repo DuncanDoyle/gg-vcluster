@@ -1,0 +1,8 @@
+networking:
+  replicateServices:
+    fromHost:
+    - from: gloo-mesh/gloo-mesh-mgmt-server
+      to: gloo-mesh/gloo-mesh-mgmt-server
+    toHost:
+    - from: httpbin/httpbin
+      to: httpbin-v2
