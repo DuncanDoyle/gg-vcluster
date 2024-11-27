@@ -1,5 +1,8 @@
 # Gloo Gateway Multicluster
 
+## Prerequisit
+
+To run this demo, you will need to have access to a Kubernetes cluster. In this guide, the name of our Kubernetes context, which is used in our scripts, `kubectl`, `glooctl` and `meshctl` command is: `gg-vcluster`. This value is also set as the `${MGMT}` environment variable in our `install/export-cluster-env-vars.sh` script.
 
 ## Setup the VClusters
 
@@ -33,6 +36,13 @@ After this, we can provision the workload cluster. This will install Gloo Gatewa
 
 ```
 ./install-gloo-workload-clusters.sh
+```
+
+Check that workload clusters have connected to the management/control plane:
+
+```
+. ./export-cluster-env-vars.sh
+meshctl --kubecontext ${MGMT} check
 ```
 
 Finally we can setup our application on our workload clusters, deploy our Gateway, HTTPRoutes, etc.:
