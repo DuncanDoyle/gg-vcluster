@@ -1,0 +1,16 @@
+apiVersion: gateway.solo.io/v1
+kind: RouteOption
+metadata:
+  name: route-option-2
+  namespace: gg-config-2
+spec:
+  options:
+    # ddoyle: Wouldn't this clash with the URLRewrite/ReplacePrefixMatch filter in the HTTPRoute?
+    # Seems that the K8S Gateway API gets precedence over the configuration here.
+    # prefixRewrite: /
+    headerManipulation:
+      # add headers to all responses
+      responseHeadersToAdd:
+        - header:
+            key: "gg-cluster"
+            value: "cluster2"

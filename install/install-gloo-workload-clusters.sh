@@ -9,8 +9,10 @@ then
 fi
 
 # The Mgmt Server is exported from the host to the workload vclusters using the given name.
-export ENDPOINT_GLOO_MESH=gloo-mesh-mgmt-server.gloo-mesh.svc.cluster.local:9900
-export HOST_GLOO_MESH=gloo-mesh-mgmt-server.gloo-mesh.svc.cluster.local
+export GLOO_MGMT_SERVER_IP=$(kubectl --context ${MGMT} -n gloo-mesh get service/gloo-mesh-mgmt-server -o jsonpath='{.spec.clusterIP}')
+
+export ENDPOINT_GLOO_MESH=$GLOO_MGMT_SERVER_IP:9900
+export HOST_GLOO_MESH=$GLOO_MGMT_SERVER_IP
 
 # Install Gloo Gateway on Cluster1
 kubectl config use-context $CLUSTER1
